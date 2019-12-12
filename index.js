@@ -1,102 +1,54 @@
 
 var Word = require("./word.js");
 
-
+var inquirer = require("inquirer");
 
 // set a list of word
 var wordlist = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
 
 // The computer randomly pick a word
+var totalChance = 10;
     var randomIndex = Math.floor(Math.random()*wordlist.length);
     // console.log(randomIndex)
-    var word = wordlist[randomIndex]
+    var randomWord = wordlist[randomIndex]
+
+    var word = new Word(randomWord);
     // console.log(word)
-    
-    var answerArray = [];
-    for (var i=0; i < word.length; i++) {
-       answerArray.push("_");
+    function checkLetters(word){
+        inquirer.prompt([
+            {
+                type: "input",
+                message:"Please type a letter.",
+                name: "userInput"
+            }
+        ]).then(function(){
+            for (i = 0; i < randomWord.length; i++){
+                if (word.userInput === randomWord[i] || totalChance > 0){
+                    word.letterArr.push(word.userInput);
+                } else if (word.userInput !== randomWord[i] || totalChance > 0){
+                    totalChance--               
+                    console.log("You type a wrong letter, please try again")
+                    console.log("You still have " + totalChance + " chances.")
+                }else{
+                    console.log('You lose.')
+                    
+                    inquirer.prompt([
+                        {
+                            type: "rawlist",
+                            message: "Do you want to try it again?",
+                            choice: ["Yes, I do want to try it", "Sorry, I don't."]
+                        }
+                    ]).then(function(answer){
+                        if (indexOf(answer.choice) = 0){
+                            checkLetters(word)
+                        }else{
+                            console.log("Bye, see you again");
+                        }
+                    })
+            
+                }
+            }
+
+        })
+
     }
-    console.log(answerArray.join(" "));
-    console.log(answerArray.length)
-
-    // while (remainingLetters > 0) {
-    var mistakes = 0;
-    var maxMistakes = 12;
-
-    function keyevent() {
-inquirer.prompt()[
-    {
-        type: "input",
-        message: "Please type a letter",
-        name:"userInput"
-    }
-]
-var isMistake = true;
-if (mistakes >= maxMistakes){
-    console.log("Game Over: Word was " + word)
-    return
-}
-for (var i = 0; i < word.length; i++){
-    if (userInput == word[i]){
-        isMistake = false;
-    console.log(word[i])
-    answerArray[i]=userInput
-    console.log(userInput);
-    console.log(answerArray.join(" "));
-    }
-
-    console.log(mistakes);
-    
-}
-    var correct = 0;
-for (var i=0; i<word.length; i++){
-    if (answerArray[i]==word[i]){
-        correct++;
-    }
-}
-if (correct == word.length) {
-    console.log("You Win!!")
-    //document.getElementById("userchoice-text").textContent = "You Win The Game!!" ;
-}
-if (isMistake == true) {
-    mistakes++
-    if (mistakes >= maxMistakes){
-        console.log("You lose")
-        //document.getElementById("userchoice-text").textContent = "Sorry, you lose." ;
-    }
-}
-        console.log(answerArray.join(" "));
-}
-
-
-
-// var Word = require("./word.js");
-
-// function WordArr(wordList) {
-//     this.word = [];
-//     // use for loop to loop through the word list
-//     this.randomWord = function(){
-//     for (i = 0; i = this.word.length; i++){
-//         this.randomWord = this.word[i]
-//     }
-//     }
-//     //computer randomly pick one work
-//     this.addWord = function() {
-//         this.word.push(new Word());
-//       };
-//     //chances the uses have
-
-    
-// };
-
-// var theWords = new WordArr("Monday");
-
-//     // calling
-//     theWords.addWord("Tuesday");
-//     theWords.addWord("Wednesday");
-//     theWords.addWord("Thursday");
-//     theWords.addWord("Friday");
-//     theWords.addWord("Saturday");
-//     theWords.addWord("Sunday");
-//     console.log(theWords);
-

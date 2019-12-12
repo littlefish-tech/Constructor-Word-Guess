@@ -3,8 +3,12 @@ var Letter = require("./letter.js");
 
 function Word(lettersArr) {
     this.lettersArr = [];
+    for (i = 0; i < this.lettersArr.length; i++){
+        var letter = new Letter(lettersArr[i])
+        this.lettersArr.push(letter);
+    }
     this.typedLetter = function(){
-        this.lettersInWord.push(this.typedLetter);
+        this.letterString = this.lettersArr.toString();
 }
 
 this.guessedletter = function(charactor){

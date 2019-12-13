@@ -12,7 +12,7 @@ var randomIndex = Math.floor(Math.random() * wordlist.length);
 
 // console.log(randomIndex)
 var randomWord = wordlist[randomIndex]
-
+console.log(randomWord);
 var computerWord = new Word(randomWord);
 // console.log(word)
 function checkLetters(computerWord) {
@@ -22,17 +22,17 @@ function checkLetters(computerWord) {
             message: "Please type a letter.",
             name: "userInput"
         }
-    ]).then(function (answer) {
+    ]).then(function (typeiInput) {
         for (i = 0; i < randomWord.length; i++) {
-            if (answer.userInput === randomWord[i] || totalChance > 0) {
-                computerWord.word.lettersArr.push(answer.userInput);
-            } else if (answer.userInput !== randomWord[i] || totalChance > 0) {
+            if (typeiInput.userInput === randomWord[i] && totalChance > 0) {
+                Word.lettersArr.push(typeiInput.userInput);
+            } else if (typeiInput.userInput !== randomWord[i] && totalChance > 0) {
                 totalChance--
                 console.log("You type a wrong letter, please try again")
                 console.log("You still have " + totalChance + " chances.")
             } else {
                 console.log('You lose.')
-
+function checkToPlayAgain(){
                 inquirer.prompt([
                     {
                         type: "rawlist",
@@ -45,12 +45,14 @@ function checkLetters(computerWord) {
                     } else {
                         console.log("Bye, see you again");
                     }
+                
                 })
-
+            }
+            checkToPlayAgain();
             }
         }
 
     })
-
+    
 }
 checkLetters();

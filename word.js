@@ -15,7 +15,7 @@ this.guessedletter = function(charactor){
     if (Letter.checkLetter === true){
         console.log('Good Job!')
     }else {
-        console.log("Sorry, try one more time.")
+        console.log("Sorry, try one more!")
     }
 }
 }

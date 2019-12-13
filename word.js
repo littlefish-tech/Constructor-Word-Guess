@@ -7,12 +7,16 @@ function Word(lettersArr) {
         var letter = new Letter(lettersArr[i])
         this.lettersArr.push(letter);
     }
-    this.typedLetter = function(){
-        this.letterString = this.lettersArr.toString();
+    this.addDisplayLetter = function(){
+        this.lettersArr.push(new Letter.displayLetter);
 }
 
 this.guessedletter = function(charactor){
-    return this.guessedLetter;
+    if (Letter.checkLetter === true){
+        console.log('Good Job!')
+    }else {
+        console.log("Sorry, try one more time.")
+    }
 }
 }
 

@@ -9,6 +9,7 @@ var wordlist = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturda
 // The computer randomly pick a word
 var totalChance = 10;
 var randomIndex = Math.floor(Math.random() * wordlist.length);
+
 // console.log(randomIndex)
 var randomWord = wordlist[randomIndex]
 
@@ -21,11 +22,11 @@ function checkLetters(computerWord) {
             message: "Please type a letter.",
             name: "userInput"
         }
-    ]).then(function () {
+    ]).then(function (answer) {
         for (i = 0; i < randomWord.length; i++) {
-            if (computerWord.userInput === randomWord[i] || totalChance > 0) {
-                computerWord.letterArr.push(word.userInput);
-            } else if (computerWord.userInput !== randomWord[i] || totalChance > 0) {
+            if (answer.userInput === randomWord[i] || totalChance > 0) {
+                computerWord.word.lettersArr.push(answer.userInput);
+            } else if (answer.userInput !== randomWord[i] || totalChance > 0) {
                 totalChance--
                 console.log("You type a wrong letter, please try again")
                 console.log("You still have " + totalChance + " chances.")
@@ -52,3 +53,4 @@ function checkLetters(computerWord) {
     })
 
 }
+checkLetters();

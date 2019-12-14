@@ -3,14 +3,17 @@ var Letter = require("./letter.js");
 
 function Word(lettersArr) {
     this.lettersArr = [];
-    for (i = 0; i < this.lettersArr.length; i++){
-        var letter = new Letter(lettersArr[i])
-        this.lettersArr.push(letter);
-    }
+    // for (i = 0; i < this.lettersArr.length; i++){
+    //     var letter = new Letter(lettersArr[i])
+    //     this.lettersArr.push(letter);
+    // }
     this.addDisplayLetter = function(){
-        this.lettersArr.push(new Letter.displayLetter);
+        if (Letter.letterGuess === True){
+        console.log(this.lettersArr.push(Letter.wordLetter));
+        } else {
+            return this.lettersArr.push("_");
 }
-
+    }
 this.guessedletter = function(charactor){
     if (Letter.checkLetter === true){
         console.log('Good Job!')

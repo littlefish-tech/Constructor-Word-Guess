@@ -13,25 +13,28 @@ var randomIndex = Math.floor(Math.random() * wordlist.length);
 // console.log(randomIndex)
 var randomWord = wordlist[randomIndex]
 console.log(randomWord);
-var computerWord = new Word(randomWord);
-// console.log(word)
-function checkLetters(computerWord) {
+var computerWord = new Word();
+
+function checkLetters() {
     inquirer.prompt([
         {
             type: "input",
             message: "Please type a letter.",
             name: "userInput"
         }
-    ]).then(function (typeiInput) {
+    ]).then(function (answers) {
         for (i = 0; i < randomWord.length; i++) {
-            if (typeiInput.userInput === randomWord[i] && totalChance > 0) {
-                Word.lettersArr.push(typeiInput.userInput);
-            } else if (typeiInput.userInput !== randomWord[i] && totalChance > 0) {
+            if (answers.userInput === randomWord[i] && totalChance > 0) {
+                computerWord.guessedletter === true;
+                console.log(computerWord.addDisplayLetter);
+            } else if (answers.userInput !== randomWord[i] && totalChance > 0) {
                 totalChance--
                 console.log("You type a wrong letter, please try again")
                 console.log("You still have " + totalChance + " chances.")
+                checkLetters();
             } else {
                 console.log('You lose.')
+                
 function checkToPlayAgain(){
                 inquirer.prompt([
                     {
@@ -39,8 +42,8 @@ function checkToPlayAgain(){
                         message: "Do you want to try it again?",
                         choice: ["Yes, I do want to try it", "Sorry, I don't."]
                     }
-                ]).then(function (answer) {
-                    if (indexOf(answer.choice) = 0) {
+                ]).then(function (answers) {
+                    if (indexOf(answers.choice) = 0) {
                         checkLetters(word)
                     } else {
                         console.log("Bye, see you again");
